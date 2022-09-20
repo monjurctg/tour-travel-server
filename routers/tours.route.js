@@ -14,10 +14,8 @@ router
   .post(tourController.createTour);
 // get by id
 router
-  .route("/tours:id")
+  .route("/tour/:id")
   .get(tourController.showSingleTour)
-  .delete((req, res) => {
-    res.send("tour delete");
-  });
+  .patch(tourController.updateOne);
 
 module.exports = router;

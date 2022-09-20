@@ -33,9 +33,18 @@ class TourService {
 
   // top 3 trending
   async topThree(type) {
-    let sort = type === "cheap" ? 1 : -1;
-    const result = await TourModel.find({}).sort({hitPoint: sort}).limit(3);
+    let result;
+    if (type === "cheap") {
+      result = await TourModel.find({}).sort({price: 1}).limit(3);
+    } else {
+      result = await TourModel.find({}).sort({hitPoint: -1}).limit(3);
+    }
     return result;
+  }
+
+  // update one
+  async updateOne(id, body) {
+    return await TourModel.updateOne({_id: id}, body, {runValidators: true});
   }
 }
 

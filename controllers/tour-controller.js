@@ -71,6 +71,7 @@ class TourController {
 
   // find s tour information by id and send response to  the client
   async showSingleTour(req, res) {
+    console.log("hitting single show");
     const {id} = req.params;
     if (!id) {
       throw Error("tour id is required");
@@ -123,6 +124,24 @@ class TourController {
       res.status(400).json({
         success: false,
         message: "Tour not find",
+        error: err.message,
+      });
+    }
+  }
+
+  // update one
+  async updateOne(req, res) {
+    try {
+      const id = req.params.id;
+      await tourService.updateOne(id, req.body);
+      res.status(200).json({
+        success: true,
+        message: "success",
+      });
+    } catch (err) {
+      res.status(400).json({
+        success: false,
+        message: "Tour not update",
         error: err.message,
       });
     }
