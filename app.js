@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const morgan = require("morgan");
+
 const rateLimit = require("express-rate-limit");
 const tourRoutes = require("./routers/tours.route");
 const errorHandler = require("./middlewares/globalErrorHandler");
@@ -9,15 +9,6 @@ const errorHandler = require("./middlewares/globalErrorHandler");
 // app.use(cors(corsOptions));
 
 app.use(express.json());
-
-// console.log(process.env.NODE_ENV);
-
-// // set security http headers
-// app.use(helmet());
-
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
 
 // $ CORS
 app.use(cors({origin: "*"}));
